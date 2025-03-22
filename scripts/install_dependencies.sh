@@ -32,6 +32,14 @@ echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm kubectl
 
+# install helm - https://helm.sh/docs/intro/install/
+echo "installing helm"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+
+
 ## Install minikube - https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64

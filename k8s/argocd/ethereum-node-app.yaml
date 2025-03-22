@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: ethereum-nodes
+  namespace: argocd
+spec:
+  description: Ethereum nodes
+  sourceRepos:
+    - 'git@github.com:haroldsphinx/linkpool-eth.git'
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+      
