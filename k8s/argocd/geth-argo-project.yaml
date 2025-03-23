@@ -6,9 +6,13 @@ metadata:
 spec:
   project: ethereum-nodes
   source:
-    repoURL: 'git@github.com:haroldsphinx/lnkpool-eth.git'
+    repoURL: 'git@github.com:haroldsphinx/ethereum-helm-charts.git'
     targetRevision: main
-    path: k8s/ethereum-node/holesky/geth-execution
+    path: charts/geth
+    helm:
+      releaseName: geth
+      valueFiles:
+        - geth-testnet.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: geth

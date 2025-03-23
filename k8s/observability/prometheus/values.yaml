@@ -12,7 +12,7 @@ grafana:
     port: 3000
   ingress:
     enabled: true
-    ingressClassName: alb
+    ingressClassName: nginx
     hosts:
       - grafana.haroldsphinx.com
     tls:
