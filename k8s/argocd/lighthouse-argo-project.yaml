@@ -6,9 +6,13 @@ metadata:
 spec:
   project: ethereum-nodes
   source:
-    repoURL: 'git@github.com:haroldsphinx/linkpool-eth.git'
+    repoURL: 'git@github.com:haroldsphinx/ethereum-helm-charts.git'
     targetRevision: main
-    path: k8s/ethereum-node/holesky/lighthouse-consensus
+    path: charts/lighthouse
+    helm:
+      releaseName: lighthouse
+      valueFiles:
+        - lighthouse-testnet.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: lighthouse-consensus
