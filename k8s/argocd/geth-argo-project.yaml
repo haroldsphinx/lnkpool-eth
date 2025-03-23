@@ -6,7 +6,7 @@ metadata:
 spec:
   project: ethereum-nodes
   source:
-    repoURL: 'git@github.com:haroldsphinx/linkpool-eth.git'
+    repoURL: 'git@github.com:haroldsphinx/lnkpool-eth.git'
     targetRevision: main
     path: k8s/ethereum-node/holesky/geth-execution
   destination:
