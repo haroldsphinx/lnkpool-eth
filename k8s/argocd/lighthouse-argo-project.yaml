@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lighthouse-consensus
+  namespace: argocd
+spec:
+  project: ethereum-nodes
+  source:
+    repoURL: 'git@github.com:haroldsphinx/linkpool-eth.git'
+    targetRevision: main
+    path: k8s/ethereum-node/holesky/lighthouse-consensus
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: lighthouse-consensus
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
