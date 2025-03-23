@@ -1,0 +1,172 @@
+global:
+  replicaCount: 1
+  network: holesky
+  JWTSecret: "5acbeb8282e1dafba5ee75534b4d8ef0312362edc935bab8be1bf9a46f6779ba"
+
+  imagePullSecrets: []
+  serviceAccount:
+    create: true
+
+  rbac:
+    create: true
+
+  metrics:
+
+    enabled: true
+
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+
+  livenessProbe:
+    enabled: false
+
+  readinessProbe:
+    enabled: false
+
+initImage:
+  repository: "bitnami/kubectl"
+  tag: "1.24"
+  pullPolicy: IfNotPresent
+
+sidecar:
+  repository: "stakewiselabs/public/ethnode-sidecar"
+  tag: "v1.0.5"
+  pullPolicy: IfNotPresent
+  bindAddr: "0.0.0.0"
+  bindPort: 3000
+
+
+image:
+  repository: "ethereum/client-go"
+  tag: "v1.14.13"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+
+nameOverride: ""
+
+
+fullnameOverride: ""
+serviceAccount:
+  annotations: {}
+
+  name: ""
+additionalLabels:
+  client-type: "execution"
+terminationGracePeriodSeconds: 300
+securityContext:
+  fsGroup: 1001
+  runAsUser: 1001
+rbac:
+  name: ""
+
+  clusterRules:
+    - apiGroups: [""]
+      resources:
+      - "nodes"
+      verbs:
+      - "get"
+      - "list"
+      - "watch"
+  rules:
+    - apiGroups: [""]
+      resources:
+      - "services"
+      verbs:
+      - "get"
+      - "list"
+      - "watch"
+
+terminalTotalDifficulty: ""
+
+authRpc:
+  port: "8551"
+  vhosts: "*"
+  addr: "0.0.0.0"
+
+
+http:
+  enabled: true
+  port: "8545"
+  api: "web3,eth,net,engine"
+  corsDomain: ""
+  vhosts: "*"
+
+
+ws:
+  enabled: true
+  port: "8546"
+  api: "web3,eth,net,engine"
+  origins: "*"
+
+
+extraFlags:
+  - "--syncmode=snap"
+  - "--rpc.txfeecap=0"
+
+podDisruptionBudget:
+  enabled: false
+  maxUnavailable: 1
+svcHeadless: false
+sessionAffinity:
+  enabled: false
+  timeoutSeconds: 86400
+p2pNodePort:
+  enabled: false
+  annotations: {}
+  type: NodePort
+  startAt: 31100
+  replicaToNodePort: {}
+metrics:
+  port: 6060
+  flags:
+    - "--metrics"
+    - "--pprof"
+    - "--pprof.addr=0.0.0.0"
+    - "--pprof.port=6060"
+  serviceMonitor:
+    namespace: ""
+    interval: 30s
+    scrapeTimeout: ""
+    relabellings: []
+    metricRelabelings: []
+    honorLabels: false
+    additionalLabels: {}
+  prometheusRule:
+    default: true
+    namespace: ""
+    additionalLabels: {}
+    rules: []
+resources: {}
+initChownData: true
+persistence:
+  enabled: true
+  storageClassName: "do-block-storage"
+  accessModes:
+    - ReadWriteOnce
+  size: 500Gi
+  annotations: {}
+livenessProbe:
+  initialDelaySeconds: 900
+  timeoutSeconds: 3
+  periodSeconds: 30
+  failureThreshold: 3
+  successThreshold: 1
+  httpGet:
+    path: /eth1/liveness
+    port: sidecar
+    scheme: HTTP
+
+readinessProbe:
+  initialDelaySeconds: 30
+  timeoutSeconds: 3
+  periodSeconds: 30
+  failureThreshold: 30
+  successThreshold: 1
+  httpGet:
+    path: /eth1/readiness
+    port: sidecar
+    scheme: HTTP
