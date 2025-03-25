@@ -1,3 +1,6 @@
+global:
+  storageClass: gp2
+
 loki:
   auth_enabled: false
   
@@ -5,10 +8,16 @@ loki:
     replication_factor: 1
 
   storage:
-    type: filesystem
-    filesystem:
-      directory: /var/loki/data
-
+    bucketNames:
+      chunks: loki-bucket
+      ruler: loki-bucket-ruler
+      admin: null
+    type: s3
+    s3:
+      endpoint: "s3.amazonaws.com"
+      region: "us-east-2"
+      s3ForcePathStyle: false
+      insecure: false
 
 
   schemaConfig:

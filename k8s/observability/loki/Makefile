@@ -1,7 +1,6 @@
 BASE_DIR=base
 RELEASE_NAME=loki
 CHART_NAME=grafana/loki
-VERSION=2.10.2
 ENVIRONMENT=testnet
 NAMESPACE=logging
 
@@ -13,11 +12,11 @@ install-dependencies:
 .PHONY: template
 template: validate install-dependencies
 	rm -rf ${BASE_DIR}/${RELEASE_NAME}
-	helm template -n ${NAMESPACE} ${RELEASE_NAME} $(CHART_NAME) --version $(VERSION) --output-dir=./base --debug -f ./values.yaml
+	helm template -n ${NAMESPACE} ${RELEASE_NAME} $(CHART_NAME)  --output-dir=./base --debug -f ./values.yaml
 
 .PHONY: deploy
 deploy:
-	helm upgrade --install -n ${NAMESPACE} $(RELEASE_NAME) $(CHART_NAME) --version $(VERSION)  -f ./values.yaml 
+	helm upgrade --install -n ${NAMESPACE} $(RELEASE_NAME) $(CHART_NAME)  -f ./values.yaml 
 .PHONY: delete
 delete: install-dependencies
 	helm uninstall -n ${NAMESPACE} $(RELEASE_NAME)
