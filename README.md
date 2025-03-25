@@ -20,6 +20,13 @@ This repository contains the configuration and setup scripts for an ethereum nod
    chmod +x setup_minikube.sh && sudo ./setup_minikube.sh
    ```
 
+## Access Instruction for argocd
+
+1. cd into argocd project, Access the ui on argocd.linkpool.nip.io, username: admin and run make get-admin-password to get oassword
+```bash 
+cd k8s/argocd
+make get-admin-password
+```
 
 
 ## Cleanup Instructions
