@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: geth
+  name: geth-testnet
   namespace: argocd
 spec:
   project: ethereum-nodes
@@ -10,12 +10,12 @@ spec:
     targetRevision: main
     path: charts/geth
     helm:
-      releaseName: geth
+      releaseName: geth-testnet
       valueFiles:
         - geth-testnet.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: geth
+    namespace: geth-testnet
   syncPolicy:
     automated:
       prune: true
