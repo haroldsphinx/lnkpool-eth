@@ -15,6 +15,16 @@ deploy: install-dependencies
 		-f values.yaml \
 		--wait
 
+minikube-install-ingress:
+	minikube addons enable ingress
+    minikube tunnel
+
+minikube-delete-ingress:
+	minikube addons disable ingress
+
+minikube-ingress-ip:
+	minikube service ingress-nginx-controller --url
+
 delete:
 	helm uninstall $(RELEASE_NAME) -n $(NAMESPACE)
 

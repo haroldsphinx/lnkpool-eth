@@ -12,7 +12,7 @@ spec:
     helm:
       releaseName: geth
       valueFiles:
-        - geth-testnet.yaml
+        - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: geth

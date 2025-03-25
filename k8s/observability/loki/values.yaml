@@ -60,3 +60,7 @@ persistence:
 service:
   type: ClusterIP
   port: 3100
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "3100"
+    prometheus.io/path: "/metrics"

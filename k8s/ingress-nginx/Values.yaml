@@ -3,6 +3,10 @@ controller:
   replicaCount: 2
   service:
     type: NodePort
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "10254"
+      prometheus.io/path: "/metrics"
     nodePorts:
       http: 30080
       https: 30443
