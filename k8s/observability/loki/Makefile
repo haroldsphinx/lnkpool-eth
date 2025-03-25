@@ -1,6 +1,6 @@
 BASE_DIR=base
 RELEASE_NAME=loki
-CHART_NAME=grafana/loki-stack
+CHART_NAME=grafana/loki
 VERSION=2.10.2
 ENVIRONMENT=testnet
 NAMESPACE=logging

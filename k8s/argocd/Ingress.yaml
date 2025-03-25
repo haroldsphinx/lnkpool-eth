@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: argocd.linkpool
+    - host: argocd.linkpool.nip.io
       http:
         paths:
           - path: /
