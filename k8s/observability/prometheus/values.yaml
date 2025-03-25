@@ -45,7 +45,7 @@ prometheus:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - lighthouse-testnet.lighthouse-testnet.svc.cluster.local:5054
+              - lighthouse.lighthouse-consensus.svc.cluster.local:5054
       - job_name: "prometheus"
         static_configs:
           - targets:
@@ -201,9 +201,7 @@ prometheus:
             target_label: __address__
             regex: (.+)(?::\d+);(\d+)
             replacement: $1:$2
-      
-
-        
+     
 kubeStateMetrics:
   enabled: false
 
