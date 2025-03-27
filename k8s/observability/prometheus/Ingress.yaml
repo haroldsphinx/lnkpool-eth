@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: grafana.haroldsphinx.com
+    - host: 2c8a-129-222-207-244.ngrok-free.app
       http:
         paths:
           - path: /

@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+  name: geth-holesky-ingress
+  namespace: geth-testnet
+spec:
+  rules:
+  - host: holesky-rpc.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: geth-testnet
+            port:
+              number: 8545
+        path: /
+        pathType: Prefix
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+  name: geth-holesky-ws
+  namespace: geth-testnet
+spec:
+  rules:
+  - host: holesky-ws.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: geth
+            port:
+              number: 8546
+        path: /
+        pathType: Prefix

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/websocket-services: lighthouse-ws
+  name: lighthouse-consensus-ingress
+  namespace: lighthouse-consensus
+spec:
+  rules:
+  - host: beacon-chain.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: lighthouse-consensus
+            port:
+              number: 5052
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - beacon.nip.io
+    secretName: lighthouse-consensus-ingress-tls
